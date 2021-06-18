@@ -1,19 +1,29 @@
 import time
 from threading import Thread, BoundedSemaphore
+import random
 
-max_dining_philosophers = 2
-semaphore = BoundedSemaphore(max_dining_philosophers)
 
-def lunch_time(i):
-    semaphore.acquire()
-    try:
-        print("Философ n. %i ест.\n" % i)
-        time.sleep(3)
-    finally:
-        semaphore.release()
-        print("Философ %i доел.\n" % i)
-        
+class DiningPhilosophers:
 
-for i in range(5):
-    th = Thread(target=lunch_time, args=(i + 1, ))
-    th.start()
+    def __init__(self):
+        self.max_dining_philosophers = 2
+        self.semaphore = BoundedSemaphore(self.max_dining_philosophers)
+
+    def lunch_time(self, i):
+        self.semaphore.acquire()
+        try:
+            print("Философ n. %i ест.\n" % i)
+            time.sleep(random.random())
+        finally:
+            self.semaphore.release()
+            print("Философ %i закончил есть.\n" % i)
+
+
+if __name__ == '__main__':
+
+    f = DiningPhilosophers()
+    for i in range(5):
+        th = Thread(target=f.lunch_time, args=(i + 1,))
+        th.start()
+
+    
