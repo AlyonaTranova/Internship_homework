@@ -7,7 +7,8 @@ SELECT * FROM bookings.tickets WHERE bookings.tickets.passenger_name = 'MAKSIM Z
 
 EXPLAIN SELECT * FROM routes 
   WHERE routes.departure_airport = 'DME'; 
--- Nested Loop (cost=1032.14..1354.55 rows=150 width=195)
+  
+\Nested Loop (cost=1032.14..1354.55 rows=150 width=195)
 
 EXPLAIN SELECT * FROM bookings.routes, bookings.aircrafts_data 
   WHERE bookings.routes.aircraft_code = bookings.aircrafts_data.aircraft_code 
