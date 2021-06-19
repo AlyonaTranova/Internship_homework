@@ -20,7 +20,7 @@ EXPLAIN SELECT * FROM bookings.boarding_passes
   LIMIT 10;
 -- Merge Join  (cost=0.71..40680.53 rows=579686 width=88)
 
-SELECT * FROM bookings.tickets 
+EXPLAIN SELECT * FROM bookings.tickets 
   JOIN bookings.boarding_passes ON(bookings.tickets.ticket_no = bookings.boarding_passes.ticket_no) 
   JOIN bookings.flights ON(bookings.boarding_passes.flight_id = bookings.flights.flight_id) 
   WHERE bookings.tickets.passenger_name = 'VALERIY TIKHONOV' 
