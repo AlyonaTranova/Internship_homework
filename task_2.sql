@@ -1,14 +1,14 @@
 -- Простые запросы на sql
 
-SELECT * FROM airports WHERE airports.city = 'Москва’;
+SELECT * FROM airports WHERE airports.city = 'Москва’.
+
 SELECT * FROM routes WHERE routes.departure_airport = 'DME';
 SELECT * FROM bookings.tickets WHERE bookings.tickets.passenger_name = 'MAKSIM ZHUKOV';
 
 
 EXPLAIN SELECT * FROM routes 
-  WHERE routes.departure_airport = 'DME'; 
-  
-\Nested Loop (cost=1032.14..1354.55 rows=150 width=195)
+  WHERE routes.departure_airport = 'DME';
+-- Nested Loop (cost=1032.14..1354.55 rows=150 width=195)
 
 EXPLAIN SELECT * FROM bookings.routes, bookings.aircrafts_data 
   WHERE bookings.routes.aircraft_code = bookings.aircrafts_data.aircraft_code 
