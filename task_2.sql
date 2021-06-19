@@ -1,7 +1,6 @@
 -- Простые запросы на sql
 
-SELECT * FROM airports WHERE airports.city = 'Москва’.
-
+SELECT * FROM airports WHERE airports.city = 'Москва';
 SELECT * FROM routes WHERE routes.departure_airport = 'DME';
 SELECT * FROM bookings.tickets WHERE bookings.tickets.passenger_name = 'MAKSIM ZHUKOV';
 
