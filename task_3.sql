@@ -1,5 +1,10 @@
 -- 1. Найдите пару аэропортов, наиболее удалённых друг от друга.
-
+SELECT a1.airport_name AS "из", a2.airport_name AS "в", a1.coordinates <@> a2.coordinates AS "расстояние"
+  FROM airports a1 
+  JOIN airports a2 ON a1.airport_name > a2.airport_name
+  ORDER BY "расстояние" DESC 
+  LIMIT 1;
+  
 -- 2. Выведите название самолёта с наибольшим количеством мест на борт
 
 SELECT s.aircraft_code, a.model, COUNT( * ) AS num_seats
