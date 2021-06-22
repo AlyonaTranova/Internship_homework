@@ -1,9 +1,21 @@
--- Простые запросы на sql
+-- 1. Найдите пару аэропортов, наиболее удалённых друг от друга.
 
-SELECT * FROM airports WHERE airports.city = 'Москва';
-SELECT * FROM routes WHERE routes.departure_airport = 'DME';
-SELECT * FROM bookings.tickets WHERE bookings.tickets.passenger_name = 'MAKSIM ZHUKOV';
+-- 2. Выведите название самолёта с наибольшим количеством мест на борт
 
+SELECT s.aircraft_code, a.model, COUNT( * ) AS num_seats
+  FROM seats s 
+  JOIN aircrafts a ON s.aircraft_code = a.aircraft_code 
+  GROUP BY 1, 2 
+  ORDER BY 3 DESC 
+  LIMIT 1; 
+  
+-- 3. Для заданного самолёта, перенумеруйте его места эконом-класса в алфавитном порядке, и для каждого места укажите его номер в этом перечислении. 
+SELECT *, rank() OVER(PARTITION BY seats.fare_conditions ORDER BY seat_no) 
+  FROM bookings.seats 
+  WHERE seats.aircraft_code = '773' AND seats.fare_conditions = 'Economy' 
+  ORDER BY seat_no collate "C";
+  
+-- Простые запросы на pl/sql
 
 EXPLAIN SELECT * FROM routes 
   WHERE routes.departure_airport = 'DME';
@@ -14,7 +26,6 @@ EXPLAIN SELECT * FROM bookings.routes, bookings.aircrafts_data
   LIMIT 5; 
 -- Hash Join  (cost=2447.75..3038.10 rows=12 width=247)
 
--- С использованием INNER JOIN
 EXPLAIN SELECT * FROM bookings.boarding_passes 
   INNER JOIN bookings.flights ON(bookings.boarding_passes.flight_id=bookings.flights.flight_id) 
   LIMIT 10;
