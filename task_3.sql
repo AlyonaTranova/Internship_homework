@@ -20,7 +20,7 @@ SELECT *, rank() OVER(PARTITION BY seats.fare_conditions ORDER BY seat_no)
   WHERE seats.aircraft_code = '773' AND seats.fare_conditions = 'Economy' 
   ORDER BY seat_no collate "C";
   
--- Простые запросы на pl/sql
+-- запросы на pl/sql
 
 EXPLAIN SELECT * FROM routes 
   WHERE routes.departure_airport = 'DME';
