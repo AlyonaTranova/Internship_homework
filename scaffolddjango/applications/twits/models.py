@@ -1,9 +1,6 @@
 from django.db import models
 
 
-# TODO поменять поля production_year и duration с числовых на более специфические
-
-
 class Film(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False, verbose_name='Название')
     production_year = models.IntegerField(blank=False, null=False, verbose_name='год производства')
