@@ -3,9 +3,9 @@ from django.db import models
 
 class Film(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False, verbose_name='Название')
-    production_year = models.IntegerField(blank=False, null=False, verbose_name='год производства')
+    production_year = models.PositiveIntegerField(validators=[MinValueValidator(1900), MaxValueValidator(datetime.now().year)])
     director = models.CharField(max_length=200, blank=False, null=False, verbose_name='режиссер')
-    duration = models.IntegerField(blank=False, null=False, verbose_name='продолжительность')
+    duration = models.PositiveIntegerField(blank=False, null=False, verbose_name='продолжительность')
     description = models.TextField(blank=False, null=False, verbose_name='описание')
 
     def __str__(self):
